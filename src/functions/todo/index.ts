@@ -37,3 +37,16 @@ export const getTodo = {
         },
     ],
 };
+
+//calling Update todo handler
+export const updateTodo = {
+    handler: `${handlerPath(__dirname)}/handler.updateTodo`,
+    events: [
+        {
+            http: {
+                method: 'put',
+                path: 'todo/{id}',
+            },
+        },
+    ],
+};

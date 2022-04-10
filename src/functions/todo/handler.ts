@@ -49,3 +49,19 @@ export const getTodo = middyfy(async (event: APIGatewayProxyEvent): Promise<APIG
         });
     }
 })
+
+// Update todo handler
+export const updateTodo = middyfy(async (): Promise<APIGatewayProxyResult> => {
+    const id = event.pathParameters.id;
+    try {
+        const todo = await todosService.updateTodo(id)
+        return formatJSONResponse({
+            todo, id
+        });
+    } catch (e) {
+        return formatJSONResponse({
+            status: 500,
+            message: e
+        });
+    }
+})
