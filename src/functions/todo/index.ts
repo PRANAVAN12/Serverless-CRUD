@@ -50,3 +50,16 @@ export const updateTodo = {
         },
     ],
 };
+
+//calling Delete todo handler
+export const deleteTodo = {
+    handler: `${handlerPath(__dirname)}/handler.deleteTodo`,
+    events: [
+        {
+            http: {
+                method: 'delete',
+                path: 'todo/{id}',
+            },
+        },
+    ],
+};

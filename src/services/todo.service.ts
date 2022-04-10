@@ -41,24 +41,34 @@ export default class TodoServerice {
     }
     return todo.Item as Todo;
   }
-  
+
   //Update  Service
   async updateTodo(id: string, todo: Partial<Todo>): Promise<Todo> {
     const updated = await this.docClient
-        .update({
-            TableName: this.Tablename,
-            Key: { todosId: id },
-            UpdateExpression:
-                "set #status = :status",
-            ExpressionAttributeNames: {
-                "#status": "status",
-            },
-            ExpressionAttributeValues: {
-                ":status": true,
-            },
-            ReturnValues: "ALL_NEW",
-        })
-        .promise();
+      .update({
+        TableName: this.Tablename,
+        Key: { todosId: id },
+        UpdateExpression: "set #status = :status",
+        ExpressionAttributeNames: {
+          "#status": "status",
+        },
+        ExpressionAttributeValues: {
+          ":status": true,
+        },
+        ReturnValues: "ALL_NEW",
+      })
+      .promise();
     return updated.Attributes as Todo;
-}
+  }
+  //Delete  Service
+  async deleteTodo(id: string): Promise<any> {
+    return await this.docClient
+      .delete({
+        TableName: this.Tablename,
+        Key: {
+          todosId: id,
+        },
+      })
+      .promise();
+  }
 }
