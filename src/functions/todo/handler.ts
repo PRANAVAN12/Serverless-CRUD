@@ -4,7 +4,7 @@ import { middyfy } from '@libs/lambda';
 import { v4 } from "uuid";
 import todosService from '../../services/'
 
-// create todo handler
+// Create todo handler
 export const createTodo = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
       const id = v4();
@@ -27,3 +27,10 @@ export const createTodo = middyfy(async (event: APIGatewayProxyEvent): Promise<A
 
 })
 
+// GetAll todo handler
+export const getAllTodos = middyfy(async (): Promise<APIGatewayProxyResult> => {
+    const todos = await todosService.getAllTodos();
+    return formatJSONResponse ({
+        todos
+    })
+})

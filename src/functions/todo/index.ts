@@ -11,3 +11,16 @@ export const createTodo = {
         },
     ],
 };
+
+//calling GetAll todo handler
+export const getAllTodos = {
+    handler: `${handlerPath(__dirname)}/handler.getAllTodos`,
+    events: [
+        {
+            http: {
+                method: 'get',
+                path: 'todo/',
+            },
+        },
+    ],
+};

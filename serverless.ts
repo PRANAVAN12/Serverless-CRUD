@@ -1,5 +1,5 @@
 import type { AWS } from '@serverless/typescript';
-import { createTodo } from './src/functions/todo';
+import { createTodo ,getAllTodos} from './src/functions/todo';
 const serverlessConfiguration: AWS = {
   service: 'aws-serverless-typescript-api',
   frameworkVersion: '3',
@@ -34,7 +34,7 @@ const serverlessConfiguration: AWS = {
     },
   },
   // import the function via paths
-  functions: {  createTodo },
+  functions: {  createTodo ,getAllTodos},
   package: { individually: true },
   custom:{
     esbuild: {

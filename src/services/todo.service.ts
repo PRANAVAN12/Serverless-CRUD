@@ -5,7 +5,7 @@ export default class TodoServerice {
   private Tablename: string = "TodosTable";
 
   constructor(private docClient: DocumentClient) {}
-// Create  service
+// Create  Service
   async createTodo(todo: Todo): Promise<Todo> {
     await this.docClient
       .put({
@@ -15,4 +15,12 @@ export default class TodoServerice {
       .promise();
     return todo as Todo;
   }
+
+// Get All   Service
+  async getAllTodos(): Promise<Todo[]> {
+    const todos = await this.docClient.scan({
+        TableName: this.Tablename,
+    }).promise()
+    return todos.Items as Todo[];
+ }
 }
