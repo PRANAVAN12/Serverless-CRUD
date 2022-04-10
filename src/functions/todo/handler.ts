@@ -34,3 +34,18 @@ export const getAllTodos = middyfy(async (): Promise<APIGatewayProxyResult> => {
         todos
     })
 })
+// Get Single todo handler
+export const getTodo = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+    const id = event.pathParameters.id;
+    try {
+        const todo = await todosService.getTodo(id)
+        return formatJSONResponse({
+            todo, id
+        });
+    } catch (e) {
+        return formatJSONResponse({
+            status: 500,
+            message: e
+        });
+    }
+})
